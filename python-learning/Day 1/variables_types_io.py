@@ -45,6 +45,18 @@ def ex_5():
 
     print(f"Reversed numbers are 1st={a}, 2nd={b}")
 
+    # You can do this (interview trick) using tuple unpacking:
+
+def ex_5_rev():
+
+    a = int(input("First number: "))
+    b = int(input("Second number: "))
+    
+    print (f"Before swap: a={a}, b={b}")
+    a, b = b, a
+
+    print(f"After swap: a={a}, b={b}")
+     
 def ex_6():
 
     c = int(input("Please provide the Celsius temperature so I can convert it to Fahrenheit: "))
