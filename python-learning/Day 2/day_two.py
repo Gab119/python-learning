@@ -187,3 +187,78 @@ def longest_increasing_subsequence():
     return max(dp)
 
 '''
+
+#Slicing:
+
+#No need for () around return!!!!!
+
+def basic_slicing():
+
+    # Given a list of integers, return a new list containing only the first 3 elements.
+
+    nums = [10, 20, 30, 40, 50]
+    return(nums[:3])
+
+def skip_elements():
+
+    # Return every second element from the list (starting from index 0).
+
+    nums = [1, 2, 3, 4, 5, 6]
+
+    return(nums[::2])
+
+def reverse_with_slicing():
+
+    # Return the list reversed, using slicing only (no .reverse() or loops). 
+
+    nums = [1,2,3,4]
+    reversed_nums = nums[::-1]
+
+    return(reversed_nums)
+
+    #unnecessary variable: return directly nums[::-1]
+
+def middle_slice():
+
+    # Given a list, return the middle part, excluding the first and last elements.
+    # Edge case to think about: what if the list has fewer than 3 elements?
+
+    nums = [5, 10, 15, 20, 25]
+    if len(nums) < 3:
+        return(nums)
+    else:
+        return(nums[1:-1])
+
+def rotate_list(k):
+
+    # Rotate a list to the right by 2 positions using slicing.
+    # Bonus: make it work for any k (not just 2), including when k > len(nums).
+
+    nums = [1, 2, 3, 4, 5]
+    k = k % len(nums)
+
+    #nums.reverse()
+    #nums[k:] = reversed(nums[k:])
+    #nums[:k] = reversed(nums[:k])
+
+    return nums[-k:] + nums [:-k]
+
+    #missed edge case:
+    #len(nums) == 0
+    
+    '''
+    def rotate_list(nums, k):
+    if not nums:
+        return []
+    k = k % len(nums)
+    return nums[-k:] + nums[:-k]
+    '''
+
+#solution (check notes):
+
+def remove_centered_chunk(nums, n):
+    if n >= len(nums):
+        return []
+    
+    start = (len(nums) - n) // 2
+    return nums[:start] + nums[start + n:]
