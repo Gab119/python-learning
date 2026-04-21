@@ -144,3 +144,183 @@ def discount_calculator_2(price, is_member):
         message = f"{int(discount * 100)}% discount applied"
 
     return f"Final price: {final_price} ({message})"
+
+#for loops
+
+def count_evens(integer_list):
+
+    even_list = []
+
+    for num in integer_list:
+        if num%2 == 0:
+            even_list.append(num)
+
+    return len(even_list)
+
+'''
+def count_evens(integer_list):
+    count = 0
+    for num in integer_list:
+        if num % 2 == 0:
+            count += 1
+    return count
+    
+'''
+
+def remove_vowels(my_string):
+
+    vowels = ['a','e','i','o','u','A','E','I','O','U']              #I can do this with '.lower()'
+    vowels_removed = ''
+
+    for letter in my_string:
+        if letter not in vowels:
+            vowels_removed += letter
+
+    print(vowels_removed)
+
+'''
+def remove_vowels(my_string):
+    vowels = "aeiouAEIOU"
+    result = []
+
+    for letter in my_string:
+        if letter not in vowels:
+            result.append(letter)
+
+    return ''.join(result)
+
+def remove_vowels(my_string):
+    vowels = "aeiou"
+    result = []
+
+    for letter in my_string:
+        if letter.lower() not in vowels:
+            result.append(letter)
+
+    return ''.join(result)
+''' 
+
+    #Interview tip: Avoid += on strings inside loops—mention immutability if you want bonus points.
+
+def second_largest(integer_list):
+
+    #Don’t use built-in sorting functions.
+    #Assume the list has at least 2 distinct numbers.
+
+    largest = 0
+    second_largest = 0
+
+    for num in integer_list:
+        if num >= largest:
+            largest = num
+        elif num > second_largest and num < largest:
+            second_largest = num
+    
+    #Why is this not working?
+
+    return(second_largest)
+
+'''
+
+def second_largest(integer_list):
+    largest = float('-inf')
+    second_largest = float('-inf')
+
+    for num in integer_list:
+        if num > largest:
+            second_largest = largest
+            largest = num
+        elif num > second_largest and num != largest:
+            second_largest = num
+
+    return second_largest
+
+'''
+
+def greater_than_avg(numbers):
+    
+    #Write a function that takes a list of integers and returns how many numbers are greater than the average.
+
+    avg = 0
+
+    #Determine the average:
+
+    for num in numbers:
+        avg += num
+    
+    avg /= len(numbers)
+
+    #How many numbers are higher than average:
+
+    counter = 0
+
+    for num in numbers:
+        if num > avg:
+            counter += 1
+
+    return(counter)
+
+'''
+
+def greater_than_avg(numbers):
+    if not numbers:
+        return 0
+
+    total = 0
+    for num in numbers:
+        total += num
+
+    avg = total / len(numbers)
+
+    count = 0
+    for num in numbers:
+        if num > avg:
+            count += 1
+
+    return count
+
+    Interview tip: Say “This is O(n) time, since I iterate twice, which is still linear.”
+'''
+
+
+def has_duplicates(numbers):
+
+    #Write a function that takes a list and returns True if it contains any duplicates, otherwise False.
+
+    for num in numbers:
+        if numbers.count(num) > 1:
+            return True
+    else:
+        return False
+    
+    #This one has a logic bug, check notes:
+
+'''
+
+def has_duplicates(numbers):
+    seen = set()
+
+    for num in numbers:
+        if num in seen:
+            return True
+        seen.add(num)
+
+    return False
+
+    #COMPLEXITY IN NOTES!
+
+'''
+
+def running_sum(numbers):
+
+    #Write a function that takes a list of integers and returns a new list where each element is the running sum up to that index.
+
+    new_sum_list = []
+    my_sum = 0
+
+    for num in numbers:
+        my_sum += num
+        new_sum_list.append(my_sum)
+
+    return(new_sum_list)
+
