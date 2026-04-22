@@ -324,3 +324,213 @@ def running_sum(numbers):
 
     return(new_sum_list)
 
+# While loops
+
+def count_to_n():
+
+    #Write a program that:
+        #Asks the user for a positive integer N
+        #Prints numbers from 1 to N using a while loop
+    
+    while True:
+        try:
+            n = int(input("Please provide a valid positive integer: "))
+            if n <= 0:
+                print("Not a positive number!")
+            else:
+                break   
+        except ValueError:
+            print("Not a number!")
+
+    counter = 1
+
+    while counter <= n:
+        print(counter)
+        counter += 1
+
+def sum_of_numbers():
+
+    #Write a program that:
+        #Repeatedly asks the user for numbers
+        #Stops when the user enters 0
+        #Prints the total sum of all entered numbers (excluding the final 0)
+
+    print("This program will give you the sum of all numbers you entered until you enter 0.")
+
+    #For simplicity, I will not do the input validation again since I did it in the previous exercise. I will assume the user provides an integer.
+
+    my_sum = 0
+    n = 1
+
+    while n != 0:
+        n = int(input("Please provide a number to be added: "))
+        my_sum += n
+    
+    print(my_sum)
+
+#Improved version:
+
+'''
+
+def sum_of_numbers():
+    print("Enter numbers. Enter 0 to stop.")
+
+    total = 0
+
+    while True:
+        n = int(input("Number: "))
+        if n == 0:
+            break
+        total += n
+
+    print(total)
+
+    Interview note: Using while True + break is often cleaner than sentinel conditions.
+'''
+
+def guess_the_number():
+
+    #Write a program that:
+        #Has a fixed secret number (e.g., 7)
+        #Keeps asking the user to guess the number
+        #Stops only when the correct number is guessed
+        #Prints how many attempts the user took
+
+    #For simplicity, I will not do the input validation again since I did it in the previous exercise. I will assume the user provides an integer.
+
+    secret_number = 7
+    n = 0
+    attempts = 0
+    
+    while n != secret_number:
+        n = int(input("Guess the number!"))
+        attempts += 1
+    
+    print(f"Correct! the number was {secret_number}!")
+    print(f"Number of attempts: {attempts}")
+
+'''
+Improved version:
+
+def guess_the_number():
+    secret_number = 7
+    attempts = 0
+
+    while True:
+        guess = int(input("Guess the number: "))
+        attempts += 1
+
+        if guess == secret_number:
+            break
+        elif guess < secret_number:
+            print("Too low!")
+        else:
+            print("Too high!")
+
+    print(f"Correct! The number was {secret_number}.")
+    print(f"Attempts: {attempts}")
+
+'''
+
+def reverse_a_number():
+
+    #Write a program that:
+        #Takes an integer input from the user
+        #Reverses the number using a while loop
+        #(e.g., 1234 → 4321)
+
+    while True:
+        try:
+            n = int(input("Please provide a valid integer: "))  
+            break
+        except ValueError:
+            print("Not a number!")
+            continue
+
+#Correct solution involving % and //:
+
+'''
+
+def reverse_a_number():
+    while True:
+        try:
+            n = int(input("Please provide a valid integer: "))
+            break
+        except ValueError:
+            print("Not a number!")
+
+    reversed_num = 0
+    original = n  # optional, for clarity
+
+    while n != 0:
+        digit = n % 10
+        reversed_num = reversed_num * 10 + digit
+        n = n // 10
+
+    print(f"Reversed number: {reversed_num}")
+
+'''
+
+'''
+For negative numbers:
+
+def reverse_a_number():
+    while True:
+        try:
+            n = int(input("Please provide a valid integer: "))
+            break
+        except ValueError:
+            print("Not a number!")
+
+    sign = -1 if n < 0 else 1   # preserve the sign
+    n = abs(n)                  # work with positive number
+
+    reversed_num = 0
+
+    while n != 0:
+        digit = n % 10
+        reversed_num = reversed_num * 10 + digit
+        n = n // 10
+
+    reversed_num *= sign        # restore the sign
+
+    print(f"Reversed number: {reversed_num}")
+
+'''
+
+def input_validation_loop():
+
+    #Write a program that:
+        #Keeps asking the user for a number between 1 and 10
+        #Only stops when the user provides a valid number
+        #Then prints "Valid input!"
+
+    while True:
+        try:
+            n = int(input("Please provide a number between 1 and 10: "))
+            if n not in range(1, 11):
+                print("Not a number between 1 and 10!")
+            else:
+                break   
+        except ValueError:
+            print("Not a number!")
+    
+    print("Valid input!")
+
+    #Slight improvement:
+
+'''
+def input_validation_loop():
+    while True:
+        try:
+            n = int(input("Please provide a number between 1 and 10: "))
+            if 1 <= n <= 10:
+                break
+            print("Number must be between 1 and 10!")
+        except ValueError:
+            print("Not a number!")
+
+    print("Valid input!")
+
+Interview note: 1 <= n <= 10 is more Pythonic than range()
+'''
