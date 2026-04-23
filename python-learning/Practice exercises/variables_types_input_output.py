@@ -1,3 +1,241 @@
+
+
+
+# The first day:
+
+#D1 - Variables - Types - Input/Output
+
+def ex_1():
+
+    x = input(f"Please provide your name: ")
+    print (f'Hello, {x}')
+
+def ex_2():
+
+    y = int(input(f"Give me the first number to add: "))
+    z = int(input(f"Give me the second number to add: "))
+    print (y+z)
+
+def ex_3():
+
+    number = int(input(f"Please provide a valid number: "))
+    print(number)
+    print(type(number))
+
+def ex_4():
+
+    # Principal ammount:
+    p = int(input("Please provide the principal ammount: "))
+    # Rate:
+    r = int(input("Please provide the rate: "))
+    # Time:
+    t = int(input("Please provide the time: "))
+
+    si = (p*r*t)/100
+    print (si)
+
+def ex_5():
+
+    # Note for review: I was not able do do this without using a third variable.
+
+    a = int(input("Provide the first number: "))
+    b = int(input("Provide the second number: "))
+
+    print(f'Numbers are: 1st={a}, 2nd={b}')
+
+    c = 0  
+    c = a
+    a = b
+    b = c
+
+    print(f"Reversed numbers are 1st={a}, 2nd={b}")
+
+    # You can do this (interview trick) using tuple unpacking:
+
+def ex_5_rev():
+
+    a = int(input("First number: "))
+    b = int(input("Second number: "))
+    
+    print (f"Before swap: a={a}, b={b}")
+    a, b = b, a
+
+    print(f"After swap: a={a}, b={b}")
+     
+def ex_6():
+
+    c = int(input("Please provide the Celsius temperature so I can convert it to Fahrenheit: "))
+    f = (c*9/5)+32
+
+    print(f"The Fahrenheit value is: {f}")
+
+def ex_7():
+
+    # Note for review: I will only count letters not spaces.
+
+    b = input("Give me a string so I can count the letters: ")
+    b= b.replace(" ","")
+    print(b)
+    print(len(b))
+
+def ex_8():
+
+    a = int(input("Please provide a number so I can verify if it is even or odd: "))
+
+    if a%2 == 0:
+        print ("Number is even!")
+    elif a%2 != 0:
+        print ("Number is odd!")
+
+def ex_9():
+
+    ammount = float(input("Please provide the bill amount: "))
+    no_of_poeple = int(input("Please provide the number of people: "))
+    pay = float(ammount/no_of_poeple)
+    print(pay)
+
+def ex_10():
+
+    # I will cover error handling in another day.
+
+    a = input("Please provide an input: ")
+    b = int(a)
+    c = float(a)
+    d = str(a)
+
+    print (f"int {b}, float {c}, string {d}")
+
+    
+
+
+
+
+
+
+
+
+# Second day one
+
+# Variables, types, input/output practice d2 (improving efficiency, readability from d1)
+
+def ex_1_1(): # Ask the user for their name and print a greeting.
+
+    name = input("What is your name?")
+    print(f"Hello, {name}!")
+
+def ex_2_1(): #Ask the user for two numbers and print their sum.
+
+    no_1 = int(input("Provide first number: "))
+    no_2 = int(input("Provide second number: "))
+
+    the_sum = no_1 + no_2
+    print(the_sum)
+
+    #Please show me here how to make an infinite input question as long as the user does not provide an integer, can I make this without try, exept?
+
+    #while True:
+    #    user_input = input("Provide a number: ")
+    #    try:
+    #        num = int(user_input)
+    #        break
+    #    except ValueError:
+    #        print("Invalid input, try again.")
+
+def ex_3_1(): #Ask the user for a number and print whether it is even or odd.
+
+    number = int(input("Provide a number: "))
+
+    if number%2 == 0:
+        print("Number is even.")
+    else:
+        print("Number is odd.")
+
+def ex_4_1(): #Ask for two numbers and an operator (+, -, *, /) and print the result.
+
+    no_1 = int(input("Provide first number: "))
+    no_2 = int(input("Provide second number: "))
+    operation = input("Provide requested operation (+,-,*,/)")
+
+    if operation == "+":
+        the_sum = no_1 + no_2
+        print(the_sum)
+    elif operation == "-":
+        if no_1 >= no_2:
+            the_substraction = no_1 - no_2
+            print(the_substraction)
+        else:
+            the_substraction = no_2 - no_1
+            print(the_substraction)
+    elif operation == "*":
+        the_multiplication = no_1 * no_2
+        print(the_multiplication)
+    elif operation == "/":
+        if no_2 == 0:
+            print("Number 2 cannot be 0")
+            return
+        else:
+            the_division = no_1 / no_2
+            print(the_division)
+
+def ex_5_1(): #Ask for two variables and swap their values.
+    
+    no_1 = input("Provide the first number: ")
+    no_2 = input("Provide the second number: ")
+
+    no_1, no_2 = no_2, no_1 
+    print(f"Swapped numbers: no_1 = {no_1}, no_2 = {no_2}")
+
+def ex_6_1(): #Ask the user for a word and print its length.
+
+    word = input("Provide a word: ")
+    print(len(word))
+    print(word[0])
+    print(word[-1])
+
+def ex_7_1(): #Convert temperature from Celsius to Fahrenheit.
+
+    celsius = float(input("What is the temperature in celsius? "))
+    f = celsius * 9/5 + 32
+    print(f"temperature in fahrenheit is: {f}")
+
+def ex_8_1(): #I did not cover the leap year, provide me with a leap year example please.
+
+    age = int(input("What is your age? "))
+    age_in_days = age * 365
+    print(f"You are {age_in_days} days old.")
+
+def ex_9_1(): #Ask for first name and last name, then generate a username like: john_doe (Bonus: make it lowercase and remove spaces)
+
+    name = input("What is your name?")
+    spaceless_name = name.replace(" ","_")
+    final_name = spaceless_name.lower()
+    print(final_name)
+
+def ex_10_1(): #Ask the user for any input and print its type:
+
+    placeholder = input("Please provide something: ")
+    
+    try:
+        float(placeholder)
+        print("number")
+    except:
+        print ("string")
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Third day one
+
 #Variables, types, i/o
 
 #Variables - 5ex:
