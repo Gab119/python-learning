@@ -253,3 +253,149 @@ def get_average(student_name):
 
 #setdefault() method will return the value of a dictionary entry for a specified key.
 #If the specified key does not exist in the dictionary, it will create an entry for it with the specified value.
+
+#Sets:
+
+def remove_duplicates(int_list):                    #Given a list of integers, return a new list with duplicates removed using a set.
+
+    return list(set(int_list))
+
+#This does not preserve order, which interviewers often care about.
+'''
+def remove_duplicates(int_list):
+    seen = set()
+    result = []
+    for num in int_list:
+        if num not in seen:
+            seen.add(num)
+            result.append(num)
+    return result
+'''
+
+def check_membership(int_list, value):              #Write a function that takes a list and a value, and returns True if the value exists in the list (using a set for efficiency).
+
+    num_list = set(int_list)
+    for num in num_list:
+        if num == value:
+            return True
+        else:
+            return False
+        
+#Problem: The loop exits on the first iteration, so it only checks one element.
+
+'''
+def check_membership(int_list, value):
+    return value in set(int_list)
+'''
+        
+def common_elements(list1, list2):                  #Given two lists, return a set of elements that appear in both.
+
+    x = set(list1)
+    y = set(list2)
+    my_set = x.intersection(y)
+    
+    return my_set
+
+#slightly cleaner: return set(list1) & set(list2)
+
+def unique_elements(list1, list2):                  #Given two lists, return elements that appear in either list but not both (symmetric difference).
+
+    x = set(list1)
+    y = set(list2)
+    my_set = x.symmetric_difference(y)
+
+    return my_set
+
+#cleaner: return set(list1) ^ set(list2)
+
+def count_unique_values(my_list):                   #Write a function that returns the number of unique elements in a list.
+
+    return len(set(my_list))
+
+def is_this_subset(list1, list2):                   #Write a function that checks if one list is a subset of another.
+
+    x = set(list1)
+    y = set(list2)
+
+    z = x.issubset(y)
+    
+    return(z)
+
+#clearner: return set(list1).issubset(set(list2))
+
+def find_missing_numbers(list1, n):                 #Given a list of numbers from 1 to n with some missing, return the missing numbers using sets.
+
+    list2 = range((1, n+1))
+    set2 = set(list2)
+    set1 = set(list1)
+
+    z = set2.difference(set1)
+
+    return z
+
+#Improvement: Return a sorted list (more practical in interviews)
+
+'''
+def find_missing_numbers(list1, n):
+    return sorted(set(range(1, n + 1)) - set(list1))
+'''
+
+def remove_common_elements(list1, list2):           #Given two lists, remove elements from the first list that also appear in the second.
+
+    x = set(list1)
+    y = set(list2)
+
+    x.difference_update(y)
+    return x
+
+#Problems:
+    # You're modifying a set (fine), but:
+        #You lose original order.
+
+'''
+def remove_common_elements(list1, list2):
+    exclude = set(list2)
+    return [x for x in list1 if x not in exclude]
+'''    
+
+def first_non_repeating_element(my_list):           #Given a list, return the first element that does not repeat (hint: combine sets with counting logic).
+
+    #How to do this without a loop and with counting logic?
+
+    counts = {}
+    
+    for item in my_list:
+        counts[item] = counts.get(item, 0) + 1
+    
+    for item in my_list:
+        if counts[item] == 1:
+            return item
+    
+    return None
+
+'''
+O(n) time
+Preserves order
+Clear logic
+'''
+
+def group_unique_characters(my_list):               #Given a list of words, group words that have the same set of characters.
+
+    #How to do this with sets?
+    
+    #You can use sets as keys (via frozenset).
+
+    groups = {}
+    
+    for word in my_list:
+        key = frozenset(word)  # set of characters
+        groups.setdefault(key, []).append(word)
+    
+    return list(groups.values())
+    
+'''
+Why frozenset?
+
+Normal sets can't be dictionary keys (they're mutable)
+frozenset is immutable → valid key
+'''
