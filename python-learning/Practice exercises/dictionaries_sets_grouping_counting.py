@@ -399,3 +399,288 @@ Why frozenset?
 Normal sets can't be dictionary keys (they're mutable)
 frozenset is immutable → valid key
 '''
+
+#Counting:
+
+'''
+ex:
+
+words = ["apple", "banana", "apple", "orange", "banana", "apple"]
+
+counts = {}
+
+for word in words:
+    if word in counts:
+        counts[word] += 1
+    else:
+        counts[word] = 1
+
+print(counts)
+
+'''
+
+#Grouping:
+
+'''
+ex:
+
+words = ["apple", "ant", "banana", "ball", "cat"]
+
+groups = {}
+
+for word in words:
+    first_letter = word[0]
+
+    if first_letter not in groups:
+        groups[first_letter] = []
+
+    groups[first_letter].append(word)
+
+print(groups)
+
+'''
+
+def count_numbers():
+
+#Count how many times each number appears.
+
+    numbers = [1, 2, 1, 3, 2, 1]
+    counter = {}
+
+    for num in numbers:
+        if num in counter:
+            counter[num] += 1
+        else:
+            counter[num] = 1
+
+    return counter
+
+def count_characters():
+
+#Count each character in a string.
+
+    text = "hello"
+    counter = {}
+
+    for letter in text:
+        if letter in counter:
+            counter[letter] += 1
+        else:
+            counter[letter] = 1
+
+    return counter
+
+def count_words():
+
+#Count each word in a sentence.
+
+    sentence = "cat dog cat bird dog cat"
+    counter = {}
+    sentence = sentence.split(" ")
+    
+    for word in sentence:
+        if word in counter:
+            counter[word] += 1
+        else:
+            counter[word] = 1
+
+    return counter
+
+#sentence.split(), improvement, why? Because .split() handles multiple spaces safely. For example "cat  dog".split() works correctly even if there are two white spaces.
+
+def find_most_common_number():
+
+    numbers = [4, 1, 4, 2, 4, 2, 1]
+    counter = {}
+
+    for num in numbers:
+        if num in counter:
+            counter[num] += 1
+        else:
+            counter[num] = 1
+
+    return max(counter, key=counter.get)
+
+def count_vowels():
+
+    text = "programming"
+    vowels = ["a", "e", "i", "o", "u"]
+    counter = {}
+
+    for letter in text:
+        if letter.lower() in vowels:
+            if letter in counter:
+                counter[letter] += 1
+            else:
+                counter[letter] = 1
+    
+    return counter
+
+#improvement, this solution could create inconsistent keys if uppercase letters exist, safer: letter = letter.lower() before counting.
+'''
+
+for letter in text:
+    letter = letter.lower()
+
+    if letter in vowels:
+
+'''
+
+def group_words_by_first_letter():
+
+    words = ["apple", "ant", "banana", "ball", "cat"]
+    groups = {}
+
+    for word in words:
+
+        first_letter = word[0]
+
+        if first_letter not in groups:
+            groups[first_letter] = []
+
+        groups[first_letter].append(word)
+
+    return groups
+
+def group_numbers_by_even_or_odd():
+
+    numbers = [1, 2, 3, 4, 5, 6]
+    groups = {}
+    word = ""
+
+    for num in numbers:
+        word = ""                               #Also you don't need this before the loop.
+        if num % 2 == 0:
+            word = "even"
+            if word not in groups:
+                groups[word] = 0
+            groups[word] += 1
+        else:
+            word = "odd"
+            if word not in groups:
+                groups[word] = 0
+            groups[word] += 1
+
+    return groups
+
+#This is the only function with a logic mismatch.
+#Exercise asked for:
+'''
+{
+    "even": [2, 4, 6],
+    "odd": [1, 3, 5]
+}
+
+and this solution give:
+
+{
+    "even": 3,
+    "odd": 3
+}
+
+accidentally switched from grouping → counting.
+
+'''
+
+#Interview ready version:
+
+'''
+def group_numbers_by_even_or_odd():
+
+    numbers = [1, 2, 3, 4, 5, 6]
+    groups = {}
+
+    for num in numbers:
+
+        if num % 2 == 0:
+            key = "even"
+        else:
+            key = "odd"
+
+        if key not in groups:
+            groups[key] = []
+
+        groups[key].append(num)
+
+    return groups
+'''
+
+def group_names_by_length():
+
+    names = ["Ana", "Bob", "Christopher", "Dan"]
+    groups = {}
+    
+    for name in names:
+        length = len(name)
+        
+        if length not in groups:
+            groups[length] = []
+
+        groups[length].append(name)
+
+    return groups
+
+def group_words_by_word_length():
+
+    words = ["hi", "cat", "dog", "hello", "sun"]
+    groups = {}
+
+    for word in words:
+        length = len(word)
+
+        if length not in groups:
+            groups[length] = []
+
+        groups[length].append(word)
+
+    return groups
+
+def group_students_by_grade():
+
+    students = [
+    ("Alice", "A"),
+    ("Bob", "B"),
+    ("Charlie", "A"),
+    ("David", "C")
+    ]
+    groups = {}
+
+    for student, grade in students:
+        student_grade = grade                       #simplification, you can directly use: if grade not in groups:
+        
+        if student_grade not in groups:
+            groups[student_grade] = []
+
+        groups[student_grade].append(student)
+
+    return groups
+
+#One important step:
+#Cleaner version using .get():
+
+'''
+Example:
+
+if word in counter:
+    counter[word] += 1
+else:
+    counter[word] = 1
+
+you can write:
+
+counter[word] = counter.get(word, 0) + 1
+
+and grouping:
+
+if key not in groups:
+    groups[key] = []
+
+groups[key].append(word)
+
+becomes:
+
+groups.setdefault(key, []).append(word)
+
+but for entry-level interviews, your current style is completely acceptable and often easier to explain.
+
+'''
